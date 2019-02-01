@@ -141,6 +141,8 @@ namespace WpfTreeview
                     Tag = directoryPath
                 };
 
+           
+
                 // add dummy item so we can expand folder
                 subItem.Items.Add(null);
 
