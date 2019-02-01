@@ -1,0 +1,15 @@
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\bin\Debug\WpfTreeview.exe.config
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\bin\Debug\WpfTreeview.exe
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\bin\Debug\WpfTreeview.pdb
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.csprojAssemblyReference.cache
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\MainWindow.g.cs
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\App.g.cs
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview_MarkupCompile.cache
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview_MarkupCompile.lref
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\MainWindow.baml
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.g.resources
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.Properties.Resources.resources
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.csproj.GenerateResource.cache
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.csproj.CoreCompileInputs.cache
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.exe
+C:\VisualStudio-workspace\lec_youtube\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.pdb

@@ -1,0 +1,15 @@
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\bin\Debug\WpfBasics.exe.config
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\bin\Debug\WpfBasics.exe
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\bin\Debug\WpfBasics.pdb
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.csprojAssemblyReference.cache
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\MainWindow.g.cs
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\App.g.cs
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics_MarkupCompile.cache
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics_MarkupCompile.lref
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\MainWindow.baml
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.g.resources
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.Properties.Resources.resources
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.csproj.GenerateResource.cache
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.csproj.CoreCompileInputs.cache
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.exe
+C:\VisualStudio-workspace\lec_youtube\WpfBasics\WpfBasics\obj\Debug\WpfBasics.pdb
