@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfTreeview
 {
+    // public인 속성을 모두 detect한 뒤 PropertyChanged에 inject한다. 버전 업 되면서 없어짐.
     //[ImplementPropertyChanged]
     public class Class1 : INotifyPropertyChanged
     {
@@ -54,7 +55,7 @@ namespace WpfTreeview
                 // 여기만 바꿔주면 UI에 바로 반영된다.
                 Test = (i++).ToString();
 
-                // Test 에 담긴 값이 실시간으로 표시되는지 확인하는 테스트 코드
+                // Test에 담긴 값이 실시간으로 표시되는지 확인하는 테스트 코드
                 // PropertyChanged(this, new PropertyChangedEventArgs("Test"));
             }
             });

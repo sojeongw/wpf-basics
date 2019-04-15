@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/// <summary>
-/// A helper class to query information about directories
-/// 실제 일어날 data logic을 구현하는 곳
-/// </summary>
 
 namespace WpfTreeview
 {
+    /// <summary>
+    /// A helper class to query information about directories
+    /// 실제 일어날 data logic을 구현하는 곳
+    /// </summary>
     public static class DirectoryStructure
     {
         /// <summary>
@@ -37,7 +33,7 @@ namespace WpfTreeview
             var items = new List<DirectoryItem>();
 
             // Main Windows에 있던 내용을 여기로 이동
-            #region Get Directories
+            #region Get Folders
 
             // try and get directories from the folder
             // ignoring any issues doing so
@@ -168,6 +164,3 @@ namespace WpfTreeview
         #endregion
     }
 }
-
-
-// tutorials: 03, 13:32

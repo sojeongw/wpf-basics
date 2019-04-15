@@ -30,7 +30,19 @@ namespace WpfTreeview
             InitializeComponent();
 
             // UI 데이터 바인딩의 root를 먼저 만들어준다.
-            this.DataContext = new Class1();
+            // this.DataContext = new Class1();
+
+            // 모든 UI는 DirectoryStructureViewModel에 바인딩된다.
+            this.DataContext = new DirectoryStructureViewModel();
+
+            /*
+            DirectoryStructureViewModel 클래스에 바인딩 하기 전에 children이 잘 나오는지 보는 테스트 코드
+            var d = new DirectoryStructureViewModel();
+            var Item1 = d.Items[0];
+
+            d.Items[0].ExpandCommand.Execute(null);
+            */
+
         }
 
         #endregion
@@ -90,7 +102,7 @@ namespace WpfTreeview
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
+
         //private void Folder_Expanded(object sender, RoutedEventArgs e)
         //{
         //    #region Initial Checks
@@ -146,7 +158,7 @@ namespace WpfTreeview
         //            Tag = directoryPath
         //        };
 
-           
+
 
         //        // add dummy item so we can expand folder
         //        subItem.Items.Add(null);
@@ -195,7 +207,7 @@ namespace WpfTreeview
         //            // and tag as full path
         //            Tag = filePath
         //        };
-                
+
         //        // add this item to the parent
         //        item.Items.Add(subItem);
         //    });
