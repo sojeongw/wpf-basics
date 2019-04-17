@@ -33,7 +33,7 @@ namespace WpfTreeview
         /// Default constructor
         /// </summary>
         /// <param name="action"></param>
-        public RelayCommand(Action action)  // run할 action을 넘겨줌 
+        public RelayCommand(Action action) // run할 action을 넘겨줌 
         {
             // 위에서 만든 mAction에 action 할당
             mAction = action;
@@ -48,7 +48,8 @@ namespace WpfTreeview
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public bool CanExecute(object parameter) {
+        public bool CanExecute(object parameter)
+        {
             return true;
         }
 

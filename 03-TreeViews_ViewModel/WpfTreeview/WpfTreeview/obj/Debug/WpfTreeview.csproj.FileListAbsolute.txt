@@ -28,4 +28,3 @@ C:\VisualStudio-workspace\lec_youtube\03-TreeViews_ViewModel\WpfTreeview\WpfTree
 C:\VisualStudio-workspace\lec_youtube\03-TreeViews_ViewModel\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.csproj.CoreCompileInputs.cache
 C:\VisualStudio-workspace\lec_youtube\03-TreeViews_ViewModel\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.exe
 C:\VisualStudio-workspace\lec_youtube\03-TreeViews_ViewModel\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.pdb
-C:\VisualStudio-workspace\lec_youtube\03-TreeViews_ViewModel\WpfTreeview\WpfTreeview\obj\Debug\WpfTreeview.csproj.Fody.CopyLocal.cache

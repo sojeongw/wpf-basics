@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using System.IO;
 
 namespace WpfTreeview
 {
@@ -11,39 +10,27 @@ namespace WpfTreeview
     /// </summary>
     /// 
 
-
-
     // [ValueConversion] 을 붙여주면 xaml에 써있는 클래스를 찾아준다.
-    [ValueConversion(typeof(string), typeof(BitmapImage))]  // ValueConversion(a, b): a라는 소스를 b로 바꿔줌 
-    class HeaderToImageConverter : IValueConverter
+    [ValueConversion(typeof(DirectoryItemType), typeof(BitmapImage))]  // ValueConversion(a, b): a라는 소스를 b로 바꿔줌 
+    public class HeaderToImageConverter : IValueConverter
     {
         public static HeaderToImageConverter Instance = new HeaderToImageConverter();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // Get the full path
-            var path = (string)value;
-
-            // if the path is null, ignore
-            if(path == null)
-            {
-                return null;
-            }
-
-            // Get the name of the file/folder
-            var name = DirectoryStructure.GetFileFolderName(path);
+            //return new BitmapImage(new Uri($"pack://application:,,,/Images/{value}.png"));
 
             // By default, we presume an image
             var image = "Images/file.png";
 
             // if the name is blank, we presume it's a drive as we cannot have a black file or folder name
-            if (string.IsNullOrEmpty(name))
-            {
+            switch((DirectoryItemType)value){
+                case DirectoryItemType.Drive:
                 image = "Images/drive.png";
-            }
-            else if(new FileInfo(path).Attributes.HasFlag(FileAttributes.Directory))
-            {
-                image = "Images/folder-closed.png";
+                    break;
+                case DirectoryItemType.Folder:
+                    image = "Images/folder-closed.png";
+                    break;
             }
 
             // 미리 불러왔던 이미지 경로를 넣어준다.

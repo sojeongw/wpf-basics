@@ -7,7 +7,7 @@ namespace WpfTreeview
     /// <summary>
     /// A view model for each directory item
     /// </summary>
-    class DirectoryItemViewModel : BaseViewModel
+    public class DirectoryItemViewModel : BaseViewModel
     {
         #region Public Properties
         /// <summary>
@@ -24,7 +24,7 @@ namespace WpfTreeview
         /// <summary>
         /// the name of this directory item
         /// </summary>
-        public string Name{ get { return this.Type == DirectoryItemType.Drive ? this.FullPath : DirectoryStructure.GetFileFolderName(this.FullPath); } }
+        public string Name { get { return this.Type == DirectoryItemType.Drive ? this.FullPath : DirectoryStructure.GetFileFolderName(this.FullPath); } }
 
         // INotifyCollectionChanged를 가지고 있어 UI나 view model의 변화를 감지한다.
         /// <summary>
@@ -32,13 +32,12 @@ namespace WpfTreeview
         /// </summary>d   
         public ObservableCollection<DirectoryItemViewModel> Children { get; set; }
 
-       
         /// <summary>
         /// Indicates if this item can be expanded
         /// </summary>
-        public bool CanExpand { get { return this.Type != DirectoryItemType.File; } } // UI의 표현을 위한 것
+        public bool CanExpand { get { return this.Type != DirectoryItemType.File; } }   // UI의 표현을 위한 것
 
-        public bool IsExpended
+        public bool IsExpanded
         {
             // expand 할지 말지 결정하고
             get
@@ -50,16 +49,14 @@ namespace WpfTreeview
             set
             {
                 // if the UI tells us to expand
-                if(value == true)
+                if (value == true)
                 {
                     // Find all children
                     Expand();
                 }
                 //if the UI tells us to close
                 else
-                {
                     this.ClearChildren();
-                }
             }
         }
 
@@ -114,10 +111,8 @@ namespace WpfTreeview
             this.Children = new ObservableCollection<DirectoryItemViewModel>();
 
             // show the expand arrow if we are not a file
-            if(this.Type != DirectoryItemType.File)
-            {
+            if (this.Type != DirectoryItemType.File)
                 this.Children.Add(null);
-            }
         }
 
         #endregion
@@ -129,15 +124,12 @@ namespace WpfTreeview
         {
             // we cannot expand a file
             if (this.Type == DirectoryItemType.File)
-            {
                 return;
-            }
 
             // find all children
             var children = DirectoryStructure.GetDirectoryContents(this.FullPath);
-
-            this.Children = new ObservableCollection<DirectoryItemViewModel>
-                (children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type)));
+            this.Children = new ObservableCollection<DirectoryItemViewModel>(
+                                children.Select(content => new DirectoryItemViewModel(content.FullPath, content.Type)));
         }
         
     }

@@ -18,8 +18,8 @@ namespace WpfTreeview
         {
 
             // get every logical drive on the machine
-          return  Directory.GetLogicalDrives().Select(drive => new DirectoryItem { FullPath = drive, Type = DirectoryItemType.Drive }).ToList();
-            
+            return Directory.GetLogicalDrives().Select(drive => new DirectoryItem { FullPath = drive, Type = DirectoryItemType.Drive }).ToList();
+
         }
 
         /// <summary>
@@ -40,15 +40,11 @@ namespace WpfTreeview
             try
             {
                 var dirs = Directory.GetDirectories(fullPath);
-                if (dirs.Length > 0)
-                {
-                    items.AddRange(dirs.Select(dir => new DirectoryItem {FullPath = dir, Type = DirectoryItemType.Folder }));
-                }
-            }
-            catch
-            {
 
+                if (dirs.Length > 0)
+                    items.AddRange(dirs.Select(dir => new DirectoryItem { FullPath = dir, Type = DirectoryItemType.Folder }));
             }
+            catch { }
 
             /* ui 부분이므로 삭제한다. */
             // for each directory
@@ -90,14 +86,10 @@ namespace WpfTreeview
                 var fs = Directory.GetFiles(fullPath);
 
                 if (fs.Length > 0)
-                {
                     items.AddRange(fs.Select(file => new DirectoryItem { FullPath = file, Type = DirectoryItemType.File }));
-                }
             }
-            catch
-            {
+            catch { }
 
-            }
 
             /* ui 관련이므로 삭제 */
             /* 
@@ -138,9 +130,7 @@ namespace WpfTreeview
         {
             // if we have no path, return emp
             if (string.IsNullOrEmpty(path))
-            {
                 return string.Empty;
-            }
 
             // path에서 슬래시와 백슬래시의 혼동을 방지하기 위함
             // 특수 문자라서 \\로 입력해 그냥 single charater라는 것을 표현함 
@@ -152,9 +142,8 @@ namespace WpfTreeview
             // 하지만 path가 스트링으로만 이루어져 있으면 LastIndexOfAny는 -1을 반환하므로 체크 구문을 만든다.
             // If we don't find a backslash, return the path itself
             if (lastIndex <= 0)
-            {
                 return path;
-            }
+
 
             // Return the name after the last backslash
             return path.Substring(lastIndex + 1);

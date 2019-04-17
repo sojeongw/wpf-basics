@@ -16,7 +16,7 @@ namespace WpfTreeview
         /// The type of this item
         /// DirectoryItemType이라는 클래스를 만들고 get, set으로 가져온다.
         /// </summary>
-        public DirectoryItemType Type {get;set;}
+        public DirectoryItemType Type { get; set; }
 
         /// <summary>
         /// The absolute path to this item
@@ -26,6 +26,6 @@ namespace WpfTreeview
         /// <summary>
         /// The name of this directory item
         /// </summary>
-        public string Name { get { return this.Type ==DirectoryItemType.Drive ? this.FullPath : DirectoryStructure.GetFileFolderName(this.FullPath); } }
+        public string Name { get { return this.Type == DirectoryItemType.Drive ? this.FullPath : DirectoryStructure.GetFileFolderName(this.FullPath); } }
     }
 }

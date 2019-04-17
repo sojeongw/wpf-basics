@@ -8,7 +8,7 @@ namespace WpfTreeview
     /// 실제 tree 구조 UI를 담는 곳
     /// </summary>
 
-    class DirectoryStructureViewModel : BaseViewModel
+    public class DirectoryStructureViewModel : BaseViewModel
     {
         #region Public Properties 
 
@@ -30,7 +30,8 @@ namespace WpfTreeview
             var children = DirectoryStructure.GetLogicalDrives();
 
             // create the view models from the data
-            this.Items = new ObservableCollection<DirectoryItemViewModel>(children.Select(drive => new DirectoryItemViewModel(drive.FullPath, DirectoryItemType.Drive)));
+            this.Items = new ObservableCollection<DirectoryItemViewModel>(
+               children.Select(drive => new DirectoryItemViewModel(drive.FullPath, DirectoryItemType.Drive)));
         }
 
         #endregion

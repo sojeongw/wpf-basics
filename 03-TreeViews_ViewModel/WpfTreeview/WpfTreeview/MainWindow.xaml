@@ -14,28 +14,25 @@
             Binding 뒤에는 넣고싶은 내용을 넣는다. 우리는 Treeview에 넣을 컬렉션을 담은
             Items를 출력하고 싶은것이니까 Items를 쓴다.-->
 
-                <TreeView x:Name="FolderView" ItemsSource="{Binding Items}">
+            <TreeView x:Name="FolderView" ItemsSource="{Binding Items}">
 
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
-                    <!--IsExpanded는 두 가지로 UI가 표현되므로 TwoWay가 된다.-->
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                </Style>
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    </Style>
                 </TreeView.ItemContainerStyle>
 
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <!--이 안에 내용을 넣는다.-->
                         <StackPanel Orientation="Horizontal">
-                            <Image Width="20" Margin="3"
-                                           Source="{Binding Type,
-                                           Converter={x:Static local:HeaderToImageConverter.Instance}}"/>
-                            <TextBox  VerticalAlignment="Center" Text="{Binding Name}"/>
-
+                            <Image Width="20" Margin="3" 
+                                    Source="{Binding Type,
+                                        Converter={x:Static local:HeaderToImageConverter.Instance}}" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
-               
+
             </TreeView>
         </Grid>
     </StackPanel>

@@ -1,17 +1,13 @@
 ﻿using PropertyChanged;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace WpfTreeview
 {
     /// <summary>
     /// A base view model that fires Property Changed events as needed
     /// </summary>
-    [AddINotifyPropertyChangedInterface]
+    [ImplementPropertyChanged]  // UI와 비즈니스 로직을 자동으로 연결해준다.
     public class BaseViewModel : INotifyPropertyChanged
     {
         /// <summary>
