@@ -10,7 +10,9 @@
         WindowStartupLocation="CenterScreen"
         x:Name="AppWindow"
         Icon="Images/Logo/logo-small.png"
-        Title="Welcome, friend" Height="600" Width="900">
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}"
+        Title="Welcome, friend!" Height="600" Width="900">
         <!--WindowStyle=none 으로 상단 바와 외곽선 등을 없애고 AllowsTransparency로 코너를 디자인할 수 있게 한다.
         윈도우에 access하기 위한 이름을 AppWindow로 만든다.-->
     
@@ -24,13 +26,112 @@
                         <!--ControlTemplate은 그냥 Window형태로 만들겠다는 Template을 설정한 것 뿐이므로
                         안에 내용이 없으면 아무것도 뜨지 않는다. 아래에 컬러 설정을 해놨더라도 이미 이것으로 덮어쓰워져 나오지 않는다.-->
                         
-                        <!--Main Window with resizable outline margin. Outer border with the dropshadow margin-->
+                        <!--Outer border with the dropshadow margin-->
                         <!--OuterMarginSizeThinkness값을 못 찾았을 경우 FallbackValue로 대신한다-->
                         <!--이 부분이 OuterMargin이 포함된 원래 사이즈-->
-                        <Border Background="Gray" Padding="{Binding OuterMarginSizeThinkness, FallbackValue=10}">
-                            <!--Main content-->
-                            <Grid Background="DarkGoldenrod">
+                        <Border Padding="{Binding OuterMarginSizeThinkness, FallbackValue=10}">
+                            
+                            <!--Main window outline-->
+                            <Grid>
                                 
+                                <!--Opacity mask for corners on grid-->
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundLightBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"/>
+
+                                <!--Window border and dropshadow-->
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        Background="{Binding ForegroundLightBrush, FallbackValue=White}">
+                                    <Border.Effect>
+                                        <!--depth는 센터를 기준으로 값을 기입하며, 0.2는 20%를 의미한다.-->
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2"/>
+                                    </Border.Effect>
+                                </Border>
+                                <!--The main window content-->
+                                <Grid>
+                                    
+                                    <!--Corner clipping-->
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}"/>
+                                    </Grid.OpacityMask>
+
+                                    <Grid.RowDefinitions>
+                                        <!--Title bar-->
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}"/>
+                                        <!--Dropshadow-->
+                                        <RowDefinition Height="Auto"/>
+                                        <!--window content, *은 나머지 공간을 차지하겠다는 말이다.-->
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!--Title Bar-->
+                                    <Grid Grid.Column="0" Panel.ZIndex="1">
+                                        <Grid.ColumnDefinitions>
+                                            <!--icon-->
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!--title-->
+                                            <ColumnDefinition Width="*"/>
+                                            <!--windows buttons-->
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!--icon-->
+                                        <!--기본값으로 두면 border가 있는 모양이 되므로 window chrome을 쓸 때는 customize를 해준다.-->
+                                        <!--IsHitTestVisibleInChrome은 마우스를 올렸을 때 interactive하게 반응한다.-->
+                                        <!--padding과 visible이 정상 작동됨이 확인되면 buttons.xaml로 옮긴다-->
+                                        <!--<Button Padding="8" Style="{StaticResource Hoverless}" WindowChrome.IsHitTestVisibleInChrome="True" Command="{Binding MenuCommand}">-->
+                                        <!--그리고 거기서 지정한 이름 SystemIconButton을 넣어준다-->
+                                        <Button Style="{StaticResource SystemIconButton}"  Command="{Binding MenuCommand}">
+                                            <Image Source="/Images/Logo/logo-small.png"/>
+                                        </Button>
+                                        
+                                        <!--Title-->
+                                        <!--viewbox는 border 안에 꽉 차게 만들 때 사용한다.-->
+                                        <Viewbox Grid.Column="1" Margin="0">
+                                            <!--xaml 맨 뒤에 있는 Title 속성을 받아옴-->
+                                            <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Welcome, Friend!'}"/>
+                                        </Viewbox>
+                                        
+                                        <!--Window Buttons-->
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <!--command를 넣어 각 버튼이 기능하도록 한다.-->
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowContorlButton}" Content="_"/>
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowContorlButton}" Content="[ ]"/>
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    <!--Drop Shadow-->
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0 0.2 0 0">
+                                        <!--Underline-->
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <!--왼쪽 line-->
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0"/>
+                                                <!--센터 line-->
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5"/>
+                                                <!--오른쪽 line-->
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        
+                                        <!--Drop Shadow-->
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <!--왼쪽 line-->
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0"/>
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        
+                                    </Border>
+                                    
+                                    <!--Page Content-->
+                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </Border>
+                                    
+                                </Grid>
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -50,6 +151,7 @@
         <!--glass frame은 윈도우 7처럼 사각형에 테두리 지는 것을 말한다. 이걸 없애기 위해 0으로 설정한다. -->
     </WindowChrome.WindowChrome>
 
-    <Grid Background="DarkCyan"></Grid>
+    <Grid Background="{StaticResource ForegroundLightBrush}">
+    </Grid>
     
 </Window>

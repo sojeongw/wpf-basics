@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Input;
+
 
 namespace Fasetto.Word
 {
@@ -35,6 +37,17 @@ namespace Fasetto.Word
         */
 
         /// <summary>
+        /// The smallest width the window can go to
+        /// 줄일 수 있는 최소 크기 설정 후 MainWindow.xaml 상단에 binding 해준다.
+        /// </summary>
+        public double WindowMinimumWidth { get; set; } = 400;
+
+        /// <summary>
+        /// The smallest height the window can go to
+        /// </summary>
+        public double WindowMinimumHeight { get; set; } = 400;
+
+        /// <summary>
         /// The size of the resize border around the window
         /// </summary>
         public int ResizeBorder { get; set; } = 6;
@@ -47,6 +60,11 @@ namespace Fasetto.Word
         /// The size of the resize border around the window, taking into account the outer margin
         /// </summary>
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder+OuterMarginSize); } }
+
+        /// <summary>
+        /// The padding of the inner content of the main window
+        /// </summary>
+        public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder); } }
 
 
         /// <summary>
@@ -90,6 +108,32 @@ namespace Fasetto.Word
         /// </summary>
         public int TitleHeight { get; set; } = 42;
 
+        public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight+ResizeBorder); } }
+
+        #endregion
+
+        #region Commands
+
+        /// <summary>
+        /// The command to minimize the window
+        /// </summary>
+        public ICommand MinimizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to maximize the window
+        /// </summary>
+        public ICommand MaximizeCommand { get; set; }
+
+        /// <summary>
+        /// The command to close the window
+        /// </summary>
+        public ICommand CloseCommand { get; set; }
+
+        /// <summary>
+        /// The command to show the system menu of the window
+        /// </summary>
+        public ICommand MenuCommand { get; set; }
+
         #endregion
 
         #region constructor
@@ -114,6 +158,30 @@ namespace Fasetto.Word
                 OnPropertyChanged(nameof(WindowCornerRadius));
 
             };
+
+            // Create commands
+            // WindowState 정의를 보면 normal=0, minimize=1, maximize=2로 되어있다.
+            MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
+            // XOR 연산을 해서 Window state가 maximized된 상태라면 0이 되고 아니면 maximized 값이 된다.
+            MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
+            CloseCommand = new RelayCommand(() => mWindow.Close());
+            MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
+
+            // Fix window resize issue
+            // 기존에 있는 resizer 코드를 불러와 적용한다. 기존에 page content에 꽉 차게 버튼을 넣으면 최대화 시켰을 때 패딩이 사라지고 완전히 꽉 차는 현상을 방지한다.
+            var resizer = new WindowResizer(mWindow);
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        private Point GetMousePosition()
+        {
+            // Position of the mouse relative to the window
+            var position = Mouse.GetPosition(mWindow);
+
+            return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
         }
 
         #endregion
