@@ -1,5 +1,7 @@
 ﻿<Window x:Class="Fasetto.Word.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -58,8 +60,6 @@
                                     <Grid.RowDefinitions>
                                         <!--Title bar-->
                                         <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}"/>
-                                        <!--Dropshadow-->
-                                        <RowDefinition Height="Auto"/>
                                         <!--window content, *은 나머지 공간을 차지하겠다는 말이다.-->
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
@@ -87,9 +87,18 @@
                                         
                                         <!--Title-->
                                         <!--viewbox는 border 안에 꽉 차게 만들 때 사용한다.-->
-                                        <Viewbox Grid.Column="1" Margin="0">
-                                            <!--xaml 맨 뒤에 있는 Title 속성을 받아옴-->
-                                            <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='Welcome, Friend!'}"/>
+                                        
+                                        <!--<Viewbox Grid.Column="1" Margin="0">는 정확한 센터가 아니다.
+                                        왼쪽엔 스마일 아이콘 하나, 오른쪽엔 아이콘 3개가 차지하고 있기 때문이다.-->
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+                                            <StackPanel>
+                                                <TextBlock FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}" Margin="0,0,0,-5">
+                                                    <!--이미지로 집어넣어도 되지만 커스텀하는 방법을 알려주기 위해 작성-->
+                                                    <!--코드를 서로 붙여 써야 blank가 생기지 않는다.-->
+                                                    <Run Text="W" Foreground="{StaticResource WordOrangeBrush}"/><Run Text="O" Foreground="{StaticResource WordBlueBrush}"/><Run Text="R" Foreground="{StaticResource WordRedBrush}"/><Run Text="D" Foreground="{StaticResource WordGreenBrush}"/>
+                                                </TextBlock >
+                                                <TextBlock Text="by fasetto" Foreground="{StaticResource ForegroundDarkBrush}" FontSize="{StaticResource FontSizeSmall}" TextAlignment="center"/>
+                                            </StackPanel>   
                                         </Viewbox>
                                         
                                         <!--Window Buttons-->
@@ -101,36 +110,11 @@
                                         </StackPanel>
                                     </Grid>
                                     
-                                    <!--Drop Shadow-->
-                                    <Border Grid.Row="1" Height="6" BorderThickness="0 0.2 0 0">
-                                        <!--Underline-->
-                                        <Border.BorderBrush>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <!--왼쪽 line-->
-                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0"/>
-                                                <!--센터 line-->
-                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5"/>
-                                                <!--오른쪽 line-->
-                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
-                                            </LinearGradientBrush>
-                                        </Border.BorderBrush>
-                                        
-                                        <!--Drop Shadow-->
-                                        <Border.Background>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                <!--왼쪽 line-->
-                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0"/>
-                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                        
-                                    </Border>
                                     
                                     <!--Page Content-->
-                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
-                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    <Border Grid.Row="1" Padding="{Binding InnerContentPadding}" >
+                                            <ContentPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
-                                    
                                 </Grid>
                             </Grid>
                         </Border>
@@ -152,6 +136,13 @@
     </WindowChrome.WindowChrome>
 
     <Grid Background="{StaticResource ForegroundLightBrush}">
+        <!--CurrentPage 라는 걸 Binding 한다고 설정해두고 WindowViewModel에 추가한다.-->
+        <!--여기서 content는 uri나 page 같은 내용이 들어가야 한다.-->
+        <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
+        <!--frame이 main content이고 CurrentPage를 찾는다. 이건 WindowViewModel에 정의가 되어있는데 Login으로 set 되어 있다.  -->
+        <!--login은 Application PageValueConverter를 통해 적합한 페이지를 찾고 return 한다.-->
+        <!--그럼 Window에 login page가 표현된다.-->
+
     </Grid>
     
 </Window>

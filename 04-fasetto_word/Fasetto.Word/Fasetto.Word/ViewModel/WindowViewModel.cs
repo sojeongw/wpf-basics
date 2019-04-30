@@ -27,6 +27,11 @@ namespace Fasetto.Word
         /// </summary>
         private int mWindowRadius = 10;
 
+        /// <summary>
+        /// The last known dock position
+        /// </summary>
+        private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
+
         #endregion
 
         #region Public Properties
@@ -48,9 +53,14 @@ namespace Fasetto.Word
         public double WindowMinimumHeight { get; set; } = 400;
 
         /// <summary>
+        /// True if the window should be borderless because it is docked or maximized
+        /// </summary>
+        public bool Borderless { get { return (mWindow.WindowState == WindowState.Maximized || mDockPosition != WindowDockPosition.Undocked); } }
+
+        /// <summary>
         /// The size of the resize border around the window
         /// </summary>
-        public int ResizeBorder { get; set; } = 6;
+        public int ResizeBorder { get { return Borderless ? 0 : 6; } } 
 
         /// <summary>
         /// Border는 OuterMargin을 포함하고 있는데
@@ -64,7 +74,7 @@ namespace Fasetto.Word
         /// <summary>
         /// The padding of the inner content of the main window
         /// </summary>
-        public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder); } }
+        public Thickness InnerContentPadding { get; set; } = new Thickness(0);  // padding 값을 0으로 변경
 
 
         /// <summary>
@@ -109,6 +119,11 @@ namespace Fasetto.Word
         public int TitleHeight { get; set; } = 42;
 
         public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight+ResizeBorder); } }
+
+        /// <summary>
+        /// The current page of the application
+        /// </summary>
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
 
         #endregion
 
