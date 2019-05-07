@@ -4,12 +4,15 @@ using System.Windows.Input;
 
 namespace Fasetto.Word
 {
+  
     /// <summary>
     /// 윈도우 자체의 사이즈 등을 정하기 위한 파일
     /// The View Model for the custom flat window
     /// </summary>
     public class WindowViewModel : BaseViewModel
     {
+        
+
         #region Private member
 
         /// <summary>
@@ -86,7 +89,8 @@ namespace Fasetto.Word
         {
             get
             {
-                return mWindow.WindowState == WindowState.Maximized ? 0 : mOuterMarginSize;
+               
+                return Borderless ? 0 : mOuterMarginSize;
             }
             set
             {
