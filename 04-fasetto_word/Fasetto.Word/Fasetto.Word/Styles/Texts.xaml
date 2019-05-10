@@ -82,7 +82,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource WordBlueBrush}"/>
         <Setter Property="BorderThickness" Value="0 0 0 1"/>
 
-        <Setter Property="local:PasswordBoxProperties.MonitorPasswordProperty" Value="True"/>
+        <Setter Property="local:MonitorPasswordProperty.Value" Value="True"/>
 
         <!--Textbox 템플릿 편집-->
         <Setter Property="Template">
@@ -105,22 +105,13 @@
                                    x:Name="placeholder"
                                    FontFamily="{StaticResource LatoThin}"
                                    Padding="{TemplateBinding Padding}"
+                                   Visibility="{TemplateBinding local:HasTextProperty.Value, Converter={local:BooleanToVisibilityConverter}}"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                    Foreground="{StaticResource ForegroundVeryDarkBrush}"
                                    >
                             
-                            <!--글자가 입력되면 기존 text 내용이 지워짐-->
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
+                           
                         </TextBlock>
 
                     </Grid>
